@@ -35,5 +35,4 @@ ${data.email}
 
 `;
 }
-// function exportying generateMarkdown function
 module.exports = generateMarkdown;

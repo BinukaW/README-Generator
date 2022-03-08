@@ -1,22 +1,14 @@
-
-// creating variable and using require function to bring in Inquirer
 const inquirer = require("inquirer");
-// creating variable and using require function to bring in fs to write file later
 const fs = require("fs");
-// creating variable and using require to use npm's path//doesn't need install//part of npm
 const path = require("path");
-// creating variable and requiring generateMarkdown.js 
 var generateMarkdown = require("./utils/generateMarkdown");
     
-// function to write README file takes in fileName and user data parameters
 function writeToFile(fileName, data) {
-  // writing file and syncing it using path to join the current working directory using the fileName and user data.
   fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
 
-// function to initialize program
+
 function init() {
-  // inquirer prompted questions for user//VIA command-line prompts
   inquirer.prompt([
     {
       type: "input",
@@ -50,8 +42,8 @@ function init() {
       },
       {
         type: "input",
-        name: "contribution",
-        message: "Enter Your Project Contribution Guidelines"
+        name: "installation",
+        message: "Enter Project Start instructions"
       },
       {
         type: "input",
@@ -76,14 +68,15 @@ function init() {
           "Mozilla Public 2.0",
           "the Unilicense"
         ]
-        }
-        // Where the user input is stored (data)
+        },
+        {
+          type: "link",
+          name: "links",
+          message: "Enter links"
+        },
     ]).then(function(data) {
-      // message for the user
       console.log("Generating Markdown...");
-      // calling function writeToFile(fileName, data) using "README.md" and generateMarkdown(data) parameters & uses a spread opperater to spread data. 
       writeToFile("README.md", generateMarkdown({...data}));  
 });
 }
-// function call to initialize program
 init()
